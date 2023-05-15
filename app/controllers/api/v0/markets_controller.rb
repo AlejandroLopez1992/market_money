@@ -1,7 +1,7 @@
 class Api::V0::MarketsController < ApplicationController
   def index
     render json: {
-      "data" => Market.all
+      "data" => Market.markets_format
     }
   end
 
