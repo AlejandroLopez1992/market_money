@@ -18,7 +18,7 @@ class Market < ApplicationRecord
   def self.markets_format
     Market.all.map do |market|
        {
-          "id": market.id,
+          "id": market.id.to_s,
           "type": "market",
           "attributes": {
             "name": market.name,
@@ -33,5 +33,23 @@ class Market < ApplicationRecord
           } 
         }
     end
+  end
+
+  def market_format
+    {
+          "id": self.id.to_s,
+          "type": "market",
+          "attributes": {
+            "name": self.name,
+            "street": self.street,
+            "city": self.city,
+            "county": self.county,
+            "state": self.state,
+            "zip": self.zip,
+            "lat": self.lat,
+            "lon": self.lon,
+            "vendor_count": self.vendor_count
+          } 
+        }
   end
 end

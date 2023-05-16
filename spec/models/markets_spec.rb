@@ -24,7 +24,7 @@ RSpec.describe Market, type: :model do
 
         expect(Market.markets_format).to eq([
           {
-          "id": market[0].id,
+          "id": market[0].id.to_s,
           "type": "market",
           "attributes": {
             "name": market[0].name,
@@ -39,7 +39,7 @@ RSpec.describe Market, type: :model do
           } 
         },
         {
-          "id": market[1].id,
+          "id": market[1].id.to_s,
           "type": "market",
           "attributes": {
             "name": market[1].name,
@@ -54,7 +54,7 @@ RSpec.describe Market, type: :model do
           } 
         },
         {
-          "id": market[2].id,
+          "id": market[2].id.to_s,
           "type": "market",
           "attributes": {
             "name": market[2].name,
@@ -90,6 +90,29 @@ RSpec.describe Market, type: :model do
   
         expect(market.vendor_count).to eq(3)
         expect(market2.vendor_count).to eq(2)
+      end
+    end
+
+    describe "market_format" do
+      it "formats selected market into new key value pairs" do
+        market = create(:market)
+
+        expect(market.market_format).to eq(
+          {
+          "id": market.id.to_s,
+          "type": "market",
+          "attributes": {
+            "name": market.name,
+            "street": market.street,
+            "city": market.city,
+            "county": market.county,
+            "state": market.state,
+            "zip": market.zip,
+            "lat": market.lat,
+            "lon": market.lon,
+            "vendor_count": market.vendor_count
+          } 
+        })
       end
     end
   end
