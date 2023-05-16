@@ -40,4 +40,30 @@ describe "Vendors API" do
     it "if input ID is not in database, error is sent" do
     end
   end
+
+  describe "POST /api/v0/vendors" do
+    it "passed attributes required as JSON and creates a new vendor" do
+      vendor_params = ({
+        "name": "Buzzy Bees",
+        "description": "local honey and wax products",
+        "contact_name": "Berly Couwer",
+        "contact_phone": "8389928383",
+        "credit_accepted": false
+      })
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+      created_vendor = Vendor.last
+
+      expect(response).to be_successful
+      expect(created_vendor.name).to eq(vendor_params[:name])
+      expect(created_vendor.description).to eq(vendor_params[:description])
+      expect(created_vendor.contact_name).to eq(vendor_params[:contact_name])
+      expect(created_vendor.contact_phone).to eq(vendor_params[:contact_phone])
+      expect(created_vendor.credit_accepted).to eq(vendor_params[:credit_accepted])
+    end
+
+    it "if passed attributes are missing or boolean is nil, error 400 is sent with message" do
+    end
+  end
 end
