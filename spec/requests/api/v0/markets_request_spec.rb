@@ -122,4 +122,74 @@ describe "Markets API" do
           )
     end
   end
+
+  describe "GET /api/v0/markets/:id/vendors" do
+    it "sends all vendors associated with market within a key of data" do
+      market = create(:market).id
+      market2 = create(:market).id
+      vendor1 = create(:vendor).id
+      vendor2 = create(:vendor).id
+      vendor3 = create(:vendor).id
+      create(:market_vendor, market_id: market, vendor_id: vendor1)
+      create(:market_vendor, market_id: market, vendor_id: vendor2)
+      create(:market_vendor, market_id: market, vendor_id: vendor3)
+
+      create(:market_vendor, market_id: market2, vendor_id: vendor3)
+      create(:market_vendor, market_id: market2, vendor_id: vendor1)
+
+      get "/api/v0/markets/#{market}/vendors"
+
+      vendor_data = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+
+      expect(vendor_data[:data].count).to eq(3)
+
+      vendor_data[:data].each do |vendor|
+        expect(vendor).to have_key(:id)
+        expect(vendor[:id]).to be_a(String)
+  
+        expect(vendor).to have_key(:type)
+        expect(vendor[:type]).to be_a(String)
+        expect(vendor[:type]).to eq("vendor")
+  
+        expect(vendor).to have_key(:attributes)
+        expect(vendor[:attributes]).to be_a(Hash)
+  
+        expect(vendor[:attributes]).to have_key(:name)
+        expect(vendor[:attributes][:name]).to be_a(String)
+  
+        expect(vendor[:attributes]).to have_key(:description)
+        expect(vendor[:attributes][:description]).to be_a(String)
+  
+        expect(vendor[:attributes]).to have_key(:contact_name)
+        expect(vendor[:attributes][:contact_name]).to be_a(String)
+  
+        expect(vendor[:attributes]).to have_key(:contact_phone)
+        expect(vendor[:attributes][:contact_phone]).to be_a(String)
+       
+        expect(vendor[:attributes]).to have_key(:credit_accepted)
+      end
+    end
+
+    it "if input ID is not in database, error is sent" do
+      market = create(:market).id
+
+      get "/api/v0/markets/#{market}023423/vendors"
+
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Couldn't find Market with 'id'=#{market}023423"
+                }
+            ]
+        }
+          )
+    end
+  end
 end
