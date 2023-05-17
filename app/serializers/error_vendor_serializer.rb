@@ -14,7 +14,7 @@ class ErrorVendorSerializer
     }
   end
 
-  def not_created_serialized_json
+  def invalid_attr_serialized_json
     {
       errors: [
         {

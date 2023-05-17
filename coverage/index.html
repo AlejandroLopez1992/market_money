@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-05-17T13:51:06-06:00">2023-05-17T13:51:06-06:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-05-17T17:41:12-06:00">2023-05-17T17:41:12-06:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,14 +23,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="green">
-  99.49%
+  99.53%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.21
+         2.15
        </span>
     </span> hits/line
     )
@@ -43,11 +43,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>394</b> relevant lines,
-    <span class="green"><b>392</b> lines covered</span> and
+    <b>429</b> relevant lines,
+    <span class="green"><b>427</b> lines covered</span> and
     <span class="red"><b>2</b> lines missed. </span>
     (<span class="green">
-  99.49%
+  99.53%
 </span>
 )
   </div>
@@ -84,11 +84,11 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#ca6231e4453f0cb0a0d94fd456ec287b5a5a68fb" class="src_link" title="app/controllers/api/v0/vendors_controller.rb">app/controllers/api/v0/vendors_controller.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">31</td>
-            <td class="cell--number">17</td>
-            <td class="cell--number">17</td>
+            <td class="cell--number">40</td>
+            <td class="cell--number">22</td>
+            <td class="cell--number">22</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.35</td>
+            <td class="cell--number">1.55</td>
             
           </tr>
         
@@ -165,7 +165,7 @@
             <td class="cell--number">7</td>
             <td class="cell--number">7</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">1.43</td>
+            <td class="cell--number">2.00</td>
             
           </tr>
         
@@ -319,7 +319,7 @@
             <td class="cell--number">7</td>
             <td class="cell--number">7</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">8.86</td>
+            <td class="cell--number">10.00</td>
             
           </tr>
         
@@ -381,9 +381,9 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#b021da10509b60a01c38ea20b45464a189e13de2" class="src_link" title="spec/requests/api/v0/vendors_request_spec.rb">spec/requests/api/v0/vendors_request_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">139</td>
-            <td class="cell--number">70</td>
-            <td class="cell--number">70</td>
+            <td class="cell--number">211</td>
+            <td class="cell--number">100</td>
+            <td class="cell--number">100</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -649,8 +649,8 @@
     
 
     <div class="t-line-summary">
-      <b>17</b> relevant lines.
-      <span class="green"><b>17</b> lines covered</span> and
+      <b>22</b> relevant lines.
+      <span class="green"><b>22</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -855,7 +855,7 @@
 
             
 
-            <code class="ruby">      render json: ErrorVendorSerializer.new(vendor.errors).not_created_serialized_json, status: 400</code>
+            <code class="ruby">      render json: ErrorVendorSerializer.new(vendor.errors).invalid_attr_serialized_json, status: 400</code>
           </li>
         </div>
       
@@ -899,40 +899,40 @@
 
             
 
-            <code class="ruby">  private </code>
+            <code class="ruby">  def update</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
+          <li class="covered" data-hits="3" data-linenumber="23">
+            <span class="hits">3</span>
             
 
-            <code class="ruby">  </code>
+            
+
+            <code class="ruby">    vendor = Vendor.find(params[:id])</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="24">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    def vendor_params</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="25">
+          <li class="covered" data-hits="2" data-linenumber="24">
             <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">      params.require(:vendor).permit(:name, :description, :contact_name, :contact_phone, :credit_accepted)</code>
+            <code class="ruby">    if vendor.update(vendor_params)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      render json: VendorSerializer.new(vendor), status: 201</code>
           </li>
         </div>
       
@@ -943,40 +943,40 @@
 
             
 
-            <code class="ruby">    end</code>
+            <code class="ruby">    else </code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="27">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="28">
+          <li class="covered" data-hits="1" data-linenumber="27">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    def not_found(exception)</code>
+            <code class="ruby">      render json: ErrorVendorSerializer.new(vendor.errors).invalid_attr_serialized_json, status: 400</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="29">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="28">
+            
             
 
             
 
-            <code class="ruby">      render json: ErrorVendorSerializer.new(exception).not_found_serialized_json, status: 404</code>
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="29">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -987,12 +987,111 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  private </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="32">
+            
+            
+
+            
+
+            <code class="ruby">  </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="33">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def vendor_params</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="4" data-linenumber="34">
+            <span class="hits">4</span>
+            
+
+            
+
+            <code class="ruby">      params.require(:vendor).permit(:name, :description, :contact_name, :contact_phone, :credit_accepted)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="35">
+            
+            
+
+            
+
             <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="never" data-hits="" data-linenumber="36">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="37">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def not_found(exception)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="3" data-linenumber="38">
+            <span class="hits">3</span>
+            
+
+            
+
+            <code class="ruby">      render json: ErrorVendorSerializer.new(exception).not_found_serialized_json, status: 404</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="39">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="40">
             
             
 
@@ -1935,8 +2034,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="4">
-            <span class="hits">3</span>
+          <li class="covered" data-hits="5" data-linenumber="4">
+            <span class="hits">5</span>
             
 
             
@@ -1990,8 +2089,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="9">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="3" data-linenumber="9">
+            <span class="hits">3</span>
             
 
             
@@ -2084,7 +2183,7 @@
 
             
 
-            <code class="ruby">  def not_created_serialized_json</code>
+            <code class="ruby">  def invalid_attr_serialized_json</code>
           </li>
         </div>
       
@@ -2100,8 +2199,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="19">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="19">
+            <span class="hits">2</span>
             
 
             
@@ -4855,8 +4954,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="12" data-linenumber="3">
-            <span class="hits">12</span>
+          <li class="covered" data-hits="14" data-linenumber="3">
+            <span class="hits">14</span>
             
 
             
@@ -4866,8 +4965,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="12" data-linenumber="4">
-            <span class="hits">12</span>
+          <li class="covered" data-hits="14" data-linenumber="4">
+            <span class="hits">14</span>
             
 
             
@@ -4877,8 +4976,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="12" data-linenumber="5">
-            <span class="hits">12</span>
+          <li class="covered" data-hits="14" data-linenumber="5">
+            <span class="hits">14</span>
             
 
             
@@ -4888,8 +4987,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="12" data-linenumber="6">
-            <span class="hits">12</span>
+          <li class="covered" data-hits="14" data-linenumber="6">
+            <span class="hits">14</span>
             
 
             
@@ -8779,8 +8878,8 @@
     
 
     <div class="t-line-summary">
-      <b>70</b> relevant lines.
-      <span class="green"><b>70</b> lines covered</span> and
+      <b>100</b> relevant lines.
+      <span class="green"><b>100</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -9458,7 +9557,7 @@
 
             
 
-            <code class="ruby">    it &quot;passed attributes required as JSON and creates a new vendor&quot; do</code>
+            <code class="ruby">    it &quot;is passed attributes required as JSON and creates a new vendor&quot; do</code>
           </li>
         </div>
       
@@ -10310,7 +10409,799 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="139">
+          <li class="covered" data-hits="1" data-linenumber="139">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  describe &quot;POST /api/v0/vendors/:id&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="140">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;can patch attributes passed as JSON to a vendor&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="141">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      vendor_id = create(:vendor, credit_accepted: true).id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="142">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      original_vendor = Vendor.last</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="143">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="144">
+            
+            
+
+            
+
+            <code class="ruby">      vendor_params = {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="145">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">          &quot;contact_name&quot;: &quot;Kimberly Couwer&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="146">
+            
+            
+
+            
+
+            <code class="ruby">          &quot;credit_accepted&quot;: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="147">
+            
+            
+
+            
+
+            <code class="ruby">      }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="148">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      headers = {&quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot;}</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="149">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="150">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      patch &quot;/api/v0/vendors/#{vendor_id}&quot;, headers: headers, params: JSON.generate({vendor: vendor_params})</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="151">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="152">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      vendor = Vendor.find_by(id: vendor_id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="153">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="154">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(response).to be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="155">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(vendor.contact_name).to_not eq(original_vendor.contact_name)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="156">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(vendor.credit_accepted).to_not eq(original_vendor.credit_accepted)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="157">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(vendor.contact_name).to eq(&quot;Kimberly Couwer&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="158">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(vendor.credit_accepted).to eq(false)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="159">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="160">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="161">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;if input ID is not in database, error is sent&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="162">
+            
+            
+
+            
+
+            <code class="ruby">      vendor_params = {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="163">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">          &quot;contact_name&quot;: &quot;Kimberly Couwer&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="164">
+            
+            
+
+            
+
+            <code class="ruby">          &quot;credit_accepted&quot;: false</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="165">
+            
+            
+
+            
+
+            <code class="ruby">      }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="166">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      headers = {&quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot;}</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="167">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="168">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      patch &quot;/api/v0/vendors/7384638495&quot;, headers: headers, params: JSON.generate({vendor: vendor_params})</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="169">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="170">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(response.status).to eq(404)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="171">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(response).to_not be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="172">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="173">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      error_message = JSON.parse(response.body, symbolize_names: true)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="174">
+            
+            
+
+            
+
+            <code class="ruby">      </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="175">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(error_message).to eq({</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="176">
+            
+            
+
+            
+
+            <code class="ruby">            &quot;errors&quot;: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="177">
+            
+            
+
+            
+
+            <code class="ruby">                {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="178">
+            
+            
+
+            
+
+            <code class="ruby">                    &quot;detail&quot;: &quot;Couldn&#39;t find Vendor with &#39;id&#39;=7384638495&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="179">
+            
+            
+
+            
+
+            <code class="ruby">                }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="180">
+            
+            
+
+            
+
+            <code class="ruby">            ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="181">
+            
+            
+
+            
+
+            <code class="ruby">        }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="182">
+            
+            
+
+            
+
+            <code class="ruby">          )</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="183">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="184">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="185">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    it &quot;if passed attributes are missing or boolean is nil, error 400 is sent with message&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="186">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      vendor_id = create(:vendor, credit_accepted: true).id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="187">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="188">
+            
+            
+
+            
+
+            <code class="ruby">      vendor_params = {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="189">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">          &quot;contact_name&quot;: &quot;&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="190">
+            
+            
+
+            
+
+            <code class="ruby">          &quot;credit_accepted&quot;: nil</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="191">
+            
+            
+
+            
+
+            <code class="ruby">      }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="192">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      headers = {&quot;CONTENT_TYPE&quot; =&gt; &quot;application/json&quot;}</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="193">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="194">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      patch &quot;/api/v0/vendors/#{vendor_id}&quot;, headers: headers, params: JSON.generate({vendor: vendor_params})</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="195">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="196">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(response.status).to eq(400)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="197">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(response).to_not be_successful</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="198">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="199">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      error_message = JSON.parse(response.body, symbolize_names: true)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="200">
+            
+            
+
+            
+
+            <code class="ruby">      </code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="201">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      expect(error_message).to eq({</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="202">
+            
+            
+
+            
+
+            <code class="ruby">            &quot;errors&quot;: [</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="203">
+            
+            
+
+            
+
+            <code class="ruby">                {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="204">
+            
+            
+
+            
+
+            <code class="ruby">                    &quot;detail&quot;: &quot;Validation failed: Contact name can&#39;t be blank, Credit accepted can&#39;t be blank&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="205">
+            
+            
+
+            
+
+            <code class="ruby">                }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="206">
+            
+            
+
+            
+
+            <code class="ruby">            ]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="207">
+            
+            
+
+            
+
+            <code class="ruby">        }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="208">
+            
+            
+
+            
+
+            <code class="ruby">          )</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="209">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="210">
+            
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="211">
             
             
 
