@@ -34,7 +34,7 @@ describe "Vendors API" do
       expect(vendor5[:data][:attributes][:contact_phone]).to be_a(String)
      
       expect(vendor5[:data][:attributes]).to have_key(:credit_accepted)
-      expect(vendor5[:data][:attributes][:credit_accepted]).to eq(true || false)
+      expect([TrueClass, FalseClass]).to include(vendor5[:data][:attributes][:credit_accepted].class)
     end
 
     it "if input ID is not in database, error is sent" do
@@ -53,9 +53,39 @@ describe "Vendors API" do
       headers = {"CONTENT_TYPE" => "application/json"}
 
       post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+
       created_vendor = Vendor.last
 
+      created_vendor_formatted = JSON.parse(response.body, symbolize_names: true)
+
       expect(response).to be_successful
+
+      expect(created_vendor_formatted[:data]).to have_key(:id)
+      expect(created_vendor_formatted[:data][:id]).to be_a(String)
+
+      expect(created_vendor_formatted[:data]).to have_key(:type)
+      expect(created_vendor_formatted[:data][:type]).to be_a(String)
+      expect(created_vendor_formatted[:data][:type]).to eq("vendor")
+
+      expect(created_vendor_formatted[:data]).to have_key(:attributes)
+      expect(created_vendor_formatted[:data][:attributes]).to be_a(Hash)
+
+      expect(created_vendor_formatted[:data][:attributes]).to have_key(:name)
+      expect(created_vendor_formatted[:data][:attributes][:name]).to be_a(String)
+
+      expect(created_vendor_formatted[:data][:attributes]).to have_key(:description)
+      expect(created_vendor_formatted[:data][:attributes][:description]).to be_a(String)
+
+      expect(created_vendor_formatted[:data][:attributes]).to have_key(:contact_name)
+      expect(created_vendor_formatted[:data][:attributes][:contact_name]).to be_a(String)
+
+      expect(created_vendor_formatted[:data][:attributes]).to have_key(:contact_phone)
+      expect(created_vendor_formatted[:data][:attributes][:contact_phone]).to be_a(String)
+     
+      expect(created_vendor_formatted[:data][:attributes]).to have_key(:credit_accepted)
+      expect(created_vendor_formatted[:data][:attributes][:credit_accepted]).to eq(false)
+
+
       expect(created_vendor.name).to eq(vendor_params[:name])
       expect(created_vendor.description).to eq(vendor_params[:description])
       expect(created_vendor.contact_name).to eq(vendor_params[:contact_name])
