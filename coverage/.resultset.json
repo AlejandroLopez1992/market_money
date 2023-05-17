@@ -276,14 +276,14 @@
         "lines": [
           1,
           1,
-          18,
-          18,
-          18,
-          18,
-          18,
-          18,
-          18,
-          18,
+          19,
+          19,
+          19,
+          19,
+          19,
+          19,
+          19,
+          19,
           null,
           null
         ]
@@ -389,14 +389,6 @@
           2,
           2,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null
         ]
       },
@@ -405,8 +397,6 @@
           1,
           1,
           1,
-          null,
-          null,
           null
         ]
       },
@@ -516,7 +506,17 @@
           1,
           null,
           null,
+          1,
+          1,
           null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
           null,
           null,
           null,
@@ -533,8 +533,17 @@
         "lines": [
           1,
           1,
+          null,
+          1,
           1,
           null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          1,
           null,
           1,
           1,
@@ -594,8 +603,28 @@
           1,
           null
         ]
+      },
+      "/Users/alejandrolopez/turing_work/3mod/projects/market_money/market_money/app/serializers/error_market_serializer.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1684254449
+    "timestamp": 1684342008
   }
 }
