@@ -102,15 +102,25 @@ describe "Markets API" do
       expect(market3[:data][:attributes][:vendor_count]).to be_an(Integer)
     end
 
-    # it "if input ID is not in database, error is sent" do
-    #   market = create(:market).id
+    it "if input ID is not in database, error is sent" do
+      market = create(:market).id
 
-    #   get "/api/v0/markets/#{market}023423"
+      get "/api/v0/markets/#{market}023423"
 
-    #   expect(responce).to_not be_successful
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
 
+      error_message = JSON.parse(response.body, symbolize_names: true)
 
-    # end
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Couldn't find Market with 'id'=#{market}023423"
+                }
+            ]
+        }
+          )
+    end
   end
 
   describe "GET /api/v0/markets/:id/vendors" do
@@ -164,6 +174,23 @@ describe "Markets API" do
     end
 
     it "if input ID is not in database, error is sent" do
+      market = create(:market).id
+
+      get "/api/v0/markets/#{market}023423/vendors"
+
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Couldn't find Market with 'id'=#{market}023423"
+                }
+            ]
+        }
+          )
     end
   end
 end
