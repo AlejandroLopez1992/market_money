@@ -34,6 +34,7 @@ describe "Vendors API" do
       expect(vendor5[:data][:attributes][:contact_phone]).to be_a(String)
      
       expect(vendor5[:data][:attributes]).to have_key(:credit_accepted)
+      expect([TrueClass, FalseClass]).to include(vendor5[:data][:attributes][:credit_accepted].class)
     end
 
     it "if input ID is not in database, error is sent" do
@@ -74,6 +75,7 @@ describe "Vendors API" do
       created_vendor_formatted = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
+      expect(response.status).to eq(201)
 
       expect(created_vendor_formatted[:data]).to have_key(:id)
       expect(created_vendor_formatted[:data][:id]).to be_a(String)
@@ -109,6 +111,29 @@ describe "Vendors API" do
     end
 
     it "if passed attributes are missing or boolean is nil, error 400 is sent with message" do
+      vendor_params = ({
+            "name": "Buzzy Bees",
+            "description": "local honey and wax products",
+            "credit_accepted": nil
+        }
+      )
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/vendors", headers: headers, params: JSON.generate(vendor: vendor_params)
+
+      expect(response.status).to eq(400)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Validation failed: Contact name can't be blank, Contact phone can't be blank, Credit accepted can't be blank"
+                }
+            ]
+        }
+          )
     end
   end
 end

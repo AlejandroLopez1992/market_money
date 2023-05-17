@@ -11,8 +11,12 @@ class Api::V0::VendorsController < ApplicationController
   end
 
   def create  
-    vendor = Vendor.create(vendor_params)
-    render json: VendorSerializer.new(vendor)
+    vendor = Vendor.new(vendor_params)
+    if vendor.save
+      render json: VendorSerializer.new(vendor), status: 201
+    else 
+      render json: ErrorVendorSerializer.new(vendor.errors).not_created_serialized_json, status: 400
+    end
   end
   
   private 
@@ -22,6 +26,6 @@ class Api::V0::VendorsController < ApplicationController
     end
 
     def not_found(exception)
-      render json: ErrorVendorSerializer.new(exception).serialized_json, status: 404
+      render json: ErrorVendorSerializer.new(exception).not_found_serialized_json, status: 404
     end
 end
