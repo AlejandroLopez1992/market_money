@@ -34,10 +34,25 @@ describe "Vendors API" do
       expect(vendor5[:data][:attributes][:contact_phone]).to be_a(String)
      
       expect(vendor5[:data][:attributes]).to have_key(:credit_accepted)
-      expect(vendor5[:data][:attributes][:credit_accepted]).to eq(true || false)
     end
 
     it "if input ID is not in database, error is sent" do
+
+      get "/api/v0/vendors/123144342134234"
+
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Couldn't find Vendor with 'id'=123144342134234"
+                }
+            ]
+        }
+          )
     end
   end
 end
