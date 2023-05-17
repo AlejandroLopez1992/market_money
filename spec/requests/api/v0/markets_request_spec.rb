@@ -169,6 +169,7 @@ describe "Markets API" do
         expect(vendor[:attributes][:contact_phone]).to be_a(String)
        
         expect(vendor[:attributes]).to have_key(:credit_accepted)
+        expect([TrueClass, FalseClass]).to include(vendor[:attributes][:credit_accepted].class)
       end
     end
 

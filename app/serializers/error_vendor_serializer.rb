@@ -4,11 +4,21 @@ class ErrorVendorSerializer
     @error_object = error_object
   end
 
-  def serialized_json
+  def not_found_serialized_json
     {
       errors: [
         {
-          detail: @error_object,
+          detail: @error_object
+        }
+      ]
+    }
+  end
+
+  def not_created_serialized_json
+    {
+      errors: [
+        {
+          detail: "Validation failed: #{@error_object.full_messages.join(", ")}"
         }
       ]
     }
