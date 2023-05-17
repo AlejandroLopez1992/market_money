@@ -15,10 +15,19 @@ class Api::V0::VendorsController < ApplicationController
     if vendor.save
       render json: VendorSerializer.new(vendor), status: 201
     else 
-      render json: ErrorVendorSerializer.new(vendor.errors).not_created_serialized_json, status: 400
+      render json: ErrorVendorSerializer.new(vendor.errors).invalid_attr_serialized_json, status: 400
     end
   end
   
+  def update
+    vendor = Vendor.find(params[:id])
+    if vendor.update(vendor_params)
+      render json: VendorSerializer.new(vendor), status: 201
+    else 
+      render json: ErrorVendorSerializer.new(vendor.errors).invalid_attr_serialized_json, status: 400
+    end
+  end
+
   private 
   
     def vendor_params

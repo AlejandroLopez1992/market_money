@@ -58,7 +58,7 @@ describe "Vendors API" do
   end
 
   describe "POST /api/v0/vendors" do
-    it "passed attributes required as JSON and creates a new vendor" do
+    it "is passed attributes required as JSON and creates a new vendor" do
       vendor_params = ({
         "name": "Buzzy Bees",
         "description": "local honey and wax products",
@@ -130,6 +130,78 @@ describe "Vendors API" do
             "errors": [
                 {
                     "detail": "Validation failed: Contact name can't be blank, Contact phone can't be blank, Credit accepted can't be blank"
+                }
+            ]
+        }
+          )
+    end
+  end
+  describe "POST /api/v0/vendors/:id" do
+    it "can patch attributes passed as JSON to a vendor" do
+      vendor_id = create(:vendor, credit_accepted: true).id
+      original_vendor = Vendor.last
+
+      vendor_params = {
+          "contact_name": "Kimberly Couwer",
+          "credit_accepted": false
+      }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v0/vendors/#{vendor_id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+
+      vendor = Vendor.find_by(id: vendor_id)
+
+      expect(response).to be_successful
+      expect(vendor.contact_name).to_not eq(original_vendor.contact_name)
+      expect(vendor.credit_accepted).to_not eq(original_vendor.credit_accepted)
+      expect(vendor.contact_name).to eq("Kimberly Couwer")
+      expect(vendor.credit_accepted).to eq(false)
+    end
+
+    it "if input ID is not in database, error is sent" do
+      vendor_params = {
+          "contact_name": "Kimberly Couwer",
+          "credit_accepted": false
+      }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v0/vendors/7384638495", headers: headers, params: JSON.generate({vendor: vendor_params})
+
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Couldn't find Vendor with 'id'=7384638495"
+                }
+            ]
+        }
+          )
+    end
+
+    it "if passed attributes are missing or boolean is nil, error 400 is sent with message" do
+      vendor_id = create(:vendor, credit_accepted: true).id
+
+      vendor_params = {
+          "contact_name": "",
+          "credit_accepted": nil
+      }
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      patch "/api/v0/vendors/#{vendor_id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+
+      expect(response.status).to eq(400)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Validation failed: Contact name can't be blank, Credit accepted can't be blank"
                 }
             ]
         }
