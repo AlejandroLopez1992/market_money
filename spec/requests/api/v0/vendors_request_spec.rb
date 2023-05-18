@@ -208,4 +208,48 @@ describe "Vendors API" do
           )
     end
   end
+
+  describe "DELETE /api/v0/vendors/:id" do
+    it "destroys vendor and all associations" do
+      vendor = create(:vendor)
+      market = create(:market)
+      market_vendor = create(:market_vendor, vendor_id: vendor.id, market_id: market.id )
+
+      expect(Vendor.count).to eq(1)
+      expect(MarketVendor.count).to eq(1)
+
+      delete "/api/v0/vendors/#{vendor.id}"
+
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+
+      expect(Vendor.count).to eq(0)
+      expect(MarketVendor.count).to eq(0)
+
+      expect{Vendor.find(vendor.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "if input ID is not in database, error is sent" do
+      vendor = create(:vendor)
+      market = create(:market)
+      market_vendor = create(:market_vendor, vendor_id: vendor.id, market_id: market.id )
+
+      delete "/api/v0/vendors/23402938402398"
+
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+      
+      expect(error_message).to eq({
+            "errors": [
+                {
+                    "detail": "Couldn't find Vendor with 'id'=23402938402398"
+                }
+            ]
+        }
+          )
+    end
+  end
+
 end
