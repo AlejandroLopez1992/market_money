@@ -102,7 +102,6 @@ describe "Vendors API" do
       expect(created_vendor_formatted[:data][:attributes]).to have_key(:credit_accepted)
       expect(created_vendor_formatted[:data][:attributes][:credit_accepted]).to eq(false)
 
-
       expect(created_vendor.name).to eq(vendor_params[:name])
       expect(created_vendor.description).to eq(vendor_params[:description])
       expect(created_vendor.contact_name).to eq(vendor_params[:contact_name])
@@ -251,5 +250,4 @@ describe "Vendors API" do
           )
     end
   end
-
 end
