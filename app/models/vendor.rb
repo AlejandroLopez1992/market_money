@@ -7,4 +7,10 @@ class Vendor < ApplicationRecord
   validates :contact_name, presence: true
   validates :contact_phone, presence: true
   validates :credit_accepted, exclusion: { :in => [nil], :message => "can't be blank" }
+
+  def market_vendor_delete
+    market_vendors.each do |m_v|
+      m_v.delete
+    end
+  end
 end
