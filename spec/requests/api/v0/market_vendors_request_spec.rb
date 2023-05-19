@@ -110,4 +110,63 @@ describe "MarketVendors API" do
         )
     end
   end
+
+  describe "DELETE /api/v0/market_vendors" do
+    it "destorys the existing market_vendor" do
+      vendor = create(:vendor)
+      market = create(:market)
+      market_vendor = create(:market_vendor, vendor_id: vendor.id, market_id: market.id )
+
+      expect(MarketVendor.count).to eq(1)
+      expect(market.vendors.count).to eq(1)
+
+      market_vendor_params = {
+          "market_id": market.id,
+          "vendor_id": vendor.id
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      delete "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor: market_vendor_params)
+
+
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+
+      expect(MarketVendor.count).to eq(0)
+      expect(market.vendors.count).to eq(0)
+
+      expect{MarketVendor.find(market_vendor.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "if passed in ids do not lead to a found MarketVEndor, error 404 is sent" do
+      vendor = create(:vendor)
+      market = create(:market)
+      market_vendor = create(:market_vendor, vendor_id: vendor.id, market_id: market.id )
+
+
+      market_vendor_params = {
+          "market_id": market.id,
+          "vendor_id": 11111111
+      }
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      delete "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor: market_vendor_params)
+
+      expect(response.status).to eq(404)
+      expect(response).to_not be_successful
+
+      error_message = JSON.parse(response.body, symbolize_names: true)
+
+      expect(error_message).to eq({
+              "errors": [
+                  {
+                      "detail": "No MarketVendor with market_id=#{market.id} AND vendor_id=11111111 exists"
+                  }
+              ]
+          }
+        )
+    end
+  end
 end
