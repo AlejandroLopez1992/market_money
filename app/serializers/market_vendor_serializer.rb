@@ -1,7 +1,9 @@
 class MarketVendorSerializer
   include JSONAPI::Serializer
-  attributes :market_id, :vendor_id
 
-  belongs_to :market
-  belongs_to :vendor
+  def success
+    {
+      "message": "Successfully added vendor to market"
+    }
+  end
 end

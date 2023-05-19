@@ -6,9 +6,12 @@ describe "MarketVendors API" do
       market = create(:market)
       vendor = create(:vendor)
 
+      expect(vendor.markets.count).to eq(0)
+      expect(market.vendors.count).to eq(0)
+
       market_vendor_params = {
-          "market_id": market_id.id,
-          "vendor_id": vendor_id.id
+          "market_id": market.id,
+          "vendor_id": vendor.id
       }
 
       headers = {"CONTENT_TYPE" => "application/json"}
@@ -24,8 +27,8 @@ describe "MarketVendors API" do
       expect(formatted_responce).to have_key(:message)
       expect(formatted_responce[:message]).to eq("Successfully added vendor to market")
 
-      expect(market.vendors).to inculde(vendor)
       expect(vendor.markets).to include(market)
+      expect(market.vendors).to include(vendor)
     end
 
     it "if input id(s) are not valid, error 404 with message is sent" do
@@ -55,19 +58,23 @@ describe "MarketVendors API" do
 
     it "if vendor or market id are not passed in, error 400 with message is sent" do
       market_vendor_params = {
-          "market_id": nil,
-          "vendor_id": ""
+          "market_id": "",
+          "vendor_id": nil
       }
 
-      expect(response).to_not be_successful
+      headers = {"CONTENT_TYPE" => "application/json"}
+
+      post "/api/v0/market_vendors", headers: headers, params: JSON.generate(market_vendor: market_vendor_params)
+
       expect(response.status).to eq(400)
+      expect(response).to_not be_successful
 
       error_message = JSON.parse(response.body, symbolize_names: true)
 
       expect(error_message).to eq({
             "errors": [
                 {
-                    "detail": "Validation failed: Market id can't be blank, Vendor id can't be blank"
+                    "detail": "Validation failed: Market can't be blank, Vendor can't be blank"
                 }
             ]
         }
@@ -80,8 +87,8 @@ describe "MarketVendors API" do
       market_vendor = create(:market_vendor, market_id: market.id, vendor_id: vendor.id)
 
       market_vendor_params = {
-          "market_id": market_id.id,
-          "vendor_id": vendor_id.id
+          "market_id": market.id,
+          "vendor_id": vendor.id
       }
 
       headers = {"CONTENT_TYPE" => "application/json"}
